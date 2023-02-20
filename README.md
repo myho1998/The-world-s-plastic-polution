@@ -13,8 +13,11 @@ Our targeted audience is worldwide consumers. We hope to get attention to convin
 
 ## Data Sources:
 The Story of Plastic (documentary film): https://www.storyofstuff.org/movies/the-story-of-plastic-documentary-film/
+
 The Great Pacific Garbage Patch Is Not What You Think It Is: https://www.bing.com/videos/search?&view=detail&mid=600ED0DA97641F1C3FB5600ED0DA97641F1C3FB5&ru=%2fsearch%3fq%3dhow%2bplatics%2bpolution%2bdestroy%2bmedia%26qs%3dn%26form%3dQBRE%26sp%3d-1%26ghc%3d1%26pq%3dhow%2bplatics%2bpolution%2bdestroy%2bmedi%26sc%3d10-33%26sk%3d%26cvid%3d866D2B6F182940D684CDB29439DD3C77%26ghsh%3d0%26ghacc%3d0%26ghpl%3d&FORM=VDRVRV&ajaxhist=0
+
 Mismanaged plastic waste (2010 & 2019): https://www.kaggle.com/datasets/kkhandekar/mismanaged-plastic-waste-around-the-world
 
 Plastic Pollution: https://ourworldindata.org/plastic-pollution
+
 World countries shapefile: https://hub.arcgis.com/datasets/esri::world-countries-generalized/explore?location=-0.767128%2C0.000000%2C2.59
