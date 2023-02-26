@@ -10,7 +10,7 @@ const map = new mapboxgl.Map({
 
 // load data and add as layer
 async function geojsonFetch() {
-    let response = await fetch('assets/data_for_choropleth.csv');
+    let response = await fetch('assets/data_for_choropleth.json');
     let plastic_waste_2019 = await response.json();
 
     map.on('load', () => { 
@@ -44,9 +44,10 @@ async function geojsonFetch() {
             }
         });
 
-        map.addSource('plastic_waste', {
+        map.addSource('global_plastic_waste', {
             type: 'geojson',
-            data: 'assets/data_for_choropleth.csv'
+            data: 'assets/data_for_choropleth.json
+            '
         });
 
         const layers = [
