@@ -45,7 +45,7 @@ async function geojsonFetch() {
         });
 
         map.addSource('global_plastic_waste', {
-            type: 'geojson',
+            type: 'json',
             data: 'assets/data_for_choropleth.json'
         });
 
