@@ -1,10 +1,10 @@
     // initialize basemmap
-    mapboxgl.accessToken =
+mapboxgl.accessToken =
     'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/dark-v10', // style URL
-    zoom: 4, // starting zoom
+    zoom: 1, // starting zoom
     center: [-100, 40] // starting center
 });
 
@@ -17,7 +17,6 @@ async function geojsonFetch() {
         map.addSource('covid_rates', {
             type: 'geojson',
             data: covid_rates
-
         });
 
         map.addLayer({
