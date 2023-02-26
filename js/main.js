@@ -15,7 +15,7 @@ async function geojsonFetch() {
 
     map.on('load', () => { 
         map.addSource('plastic_waste_2019', {
-            type: 'geojson',
+            type: 'json',
             data: plastic_waste_2019
         });
 
@@ -46,8 +46,7 @@ async function geojsonFetch() {
 
         map.addSource('global_plastic_waste', {
             type: 'geojson',
-            data: 'assets/data_for_choropleth.json
-            '
+            data: 'assets/data_for_choropleth.json'
         });
 
         const layers = [
