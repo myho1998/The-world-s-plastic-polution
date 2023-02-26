@@ -1,5 +1,32 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Covid-19 Interactive Mapping</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        .mapboxgl-canvas-container.mapboxgl-interactive,
+        .mapboxgl-ctrl-group button.mapboxgl-ctrl-compass {
+            cursor: unset;
+        }
+    </style>
+</head>
+
 <body>
+    <div id="map"></div>
+    <div class='map-overlay' id='features2'>
+        <h2><center> Covid-19 Rates</center></h2>
+        <div id='text-description'>
+            <p><center>This interactive map displays Covid-19 rates in counties across the US in 2020</center></p>
+        </div>
+    </div>
+    <div class='map-overlay' id='legend'></div>
+    <script src="js/main.js"></script>
+
 </body>
+
 </html>
