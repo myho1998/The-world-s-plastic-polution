@@ -1,4 +1,4 @@
-# The-world-s-plastic-polution
+# Global Plastic Pollution
 ## Project Idea
 For our project, we plan to create a web map that includes an interactive map with clickable buttons, as well as interactive charts that highlight pollution spread and its types. Our project desires to show which countries pollute the most, and what types of pollution are the most common in certain areas. Our project wants to put emphasis on the global plastic pollution crisis. We hope to influence others to be more conscious when living their lifestyles. 
 
