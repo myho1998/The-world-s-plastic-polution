@@ -11,22 +11,22 @@ const map = new mapboxgl.Map({
 // load data and add as layer
 async function geojsonFetch() {
     let response = await fetch('assets/data_for_choropleth.csv');
-    let covid_rates = await response.json();
+    let plastic_waste_2019 = await response.json();
 
     map.on('load', () => { 
-        map.addSource('covid_rates', {
+        map.addSource('plastic_waste_2019', {
             type: 'geojson',
-            data: covid_rates
+            data: plastic_waste_2019
         });
 
         map.addLayer({
-            'id': 'covid_rates_layer',
+            'id': 'plastic_waste_layer',
             'type': 'fill',
-            'source': 'covid_rates',
+            'source': 'plastic_waste_2019',
             'paint': {
                 'fill-color': [
                     'step',
-                    ['get', 'rates'],
+                    ['get', 'pWaste2016'],
                     '#FFEDA0',   // stop_output_0
                     10,          // stop_input_0
                     '#FEB24C',   // stop_output_2
@@ -44,7 +44,7 @@ async function geojsonFetch() {
             }
         });
 
-        map.addSource('us-covid-2020-counts', {
+        map.addSource('plastic_waste', {
             type: 'geojson',
             data: 'assets/data_for_choropleth.csv'
         });
@@ -89,7 +89,7 @@ async function geojsonFetch() {
 
     map.on('mousemove', ({point}) => {
         const state = map.queryRenderedFeatures(point, {
-            layers: ['covid_rates_layer']
+            layers: ['plastic_waste_layer']
         });
         document.getElementById('text-description').innerHTML = state.length ?
             `<h3><center>${state[0].properties.state}</center></h3><p><strong><em>${state[0].properties.rates}</strong> cases per thousand residents in ${state[0].properties.county}, ${state[0].properties.state}</em></p>` :
