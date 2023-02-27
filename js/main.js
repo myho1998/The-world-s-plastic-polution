@@ -10,12 +10,12 @@ const map = new mapboxgl.Map({
 
 // load data and add as layer
 async function geojsonFetch() {
-    let response = await fetch('assets/data_for_choropleth.json');
+    let response = await fetch('assets/new_data2.json');
     let plastic_waste_2019 = await response.json();
 
     map.on('load', () => { 
         map.addSource('plastic_waste_2019', {
-            type: 'json',
+            type: 'geojson',
             data: plastic_waste_2019
         });
 
@@ -49,11 +49,9 @@ async function geojsonFetch() {
             url: 'mapbox://mapbox.country-boundaries-v1'
         });
 
-        
-
         map.addSource('global_plastic_waste', {
-            type: 'json',
-            data: 'assets/data_for_choropleth.json'
+            type: 'geojson',
+            data: 'assets/new_data2.json'
         });
 
         
