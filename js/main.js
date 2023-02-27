@@ -3,9 +3,9 @@ mapboxgl.accessToken =
     'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
 const map = new mapboxgl.Map({
     container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/dark-v10', // style URL
-    zoom: 1, // starting zoom
-    center: [-100, 40] // starting center
+    style: 'mapbox://styles/mapbox/light-v10', // style URL
+    zoom: 2.2, // starting zoom
+    center: [12,50] // starting center
 });
 
 // load data and add as layer
@@ -26,7 +26,7 @@ async function geojsonFetch() {
             'paint': {
                 'fill-color': [
                     'step',
-                    ['get', 'pWaste2016'],
+                    ['get', 'pWastePercap2016'],
                     '#FFEDA0',   // stop_output_0
                     10,          // stop_input_0
                     '#FEB24C',   // stop_output_2
@@ -44,10 +44,19 @@ async function geojsonFetch() {
             }
         });
 
+        map.addSource('countries', {
+            type: 'vector',
+            url: 'mapbox://mapbox.country-boundaries-v1'
+        });
+
+        
+
         map.addSource('global_plastic_waste', {
             type: 'json',
             data: 'assets/data_for_choropleth.json'
         });
+
+        
 
         const layers = [
             '0-9',
@@ -70,8 +79,6 @@ async function geojsonFetch() {
         const legend = document.getElementById('legend');
         legend.innerHTML = "<b><center><span style='color: white;'>Covid-19 Cases (per thousand residents)</center><br>";
 
-
-
         layers.forEach((layer, i) => {
             const color = colors[i];
             const item = document.createElement('div');
@@ -93,7 +100,7 @@ async function geojsonFetch() {
         });
         document.getElementById('text-description').innerHTML = state.length ?
             `<h3><center>${state[0].properties.state}</center></h3><p><strong><em>${state[0].properties.rates}</strong> cases per thousand residents in ${state[0].properties.county}, ${state[0].properties.state}</em></p>` :
-            `<p><center><a href="https://data.census.gov/table?g=0100000US$050000&d=ACS+5-Year+Estimates+Data+Profiles&tid=ACSDP5Y2018.DP05&hidePreview=true">Source: US Census Bureau </a></center></p>`;
+            `<p><center><a href="https://worldpopulationreview.com/country-rankings/plastic-pollution-by-country">Source: World Population Review </a></center></p>`;
             
     });
 }
