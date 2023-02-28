@@ -1,32 +1,906 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>Covid-19 Interactive Mapping</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
-    <link rel="stylesheet" href="css/style.css"/>
-    <style>
-        .mapboxgl-canvas-container.mapboxgl-interactive,
-        .mapboxgl-ctrl-group button.mapboxgl-ctrl-compass {
-            cursor: unset;
-        }
-    </style>
+<meta charset="utf-8">
+<title>Global Plastic Pollution</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
 </head>
-
 <body>
-    <div id="map"></div>
-    <div class='map-overlay' id='features2'>
-        <h2><center> Covid-19 Rates</center></h2>
-        <div id='text-description'>
-            <p><center>This interactive map displays Covid-19 rates in counties across the US in 2020</center></p>
-        </div>
-    </div>
-    <div class='map-overlay' id='legend'></div>
-    <script src="js/main.js"></script>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [12, 50],
+        zoom: 2.2
+    });
+
+    // Data: 
+    const data = [
+  {
+    "code": "PHL",
+    "pWastePercap2016": 14
+  },
+  {
+    "code": "IND",
+    "pWastePercap2016": 19
+  },
+  {
+    "code": "MYS",
+    "pWastePercap2016": 67
+  },
+  {
+    "code": "CHN",
+    "pWastePercap2016": 15
+  },
+  {
+    "code": "IDN",
+    "pWastePercap2016": 34
+  },
+  {
+    "code": "BRA",
+    "pWastePercap2016": 51
+  },
+  {
+    "code": "VNM",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "BGD",
+    "pWastePercap2016": 4
+  },
+  {
+    "code": "THA",
+    "pWastePercap2016": 69
+  },
+  {
+    "code": "NGA",
+    "pWastePercap2016": 8
+  },
+  {
+    "code": "CMR",
+    "pWastePercap2016": 5
+  },
+  {
+    "code": "LKA",
+    "pWastePercap2016": 8
+  },
+  {
+    "code": "GTM",
+    "pWastePercap2016": 29
+  },
+  {
+    "code": "HTI",
+    "pWastePercap2016": 27
+  },
+  {
+    "code": "DOM",
+    "pWastePercap2016": 40
+  },
+  {
+    "code": "VEN",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "TZA",
+    "pWastePercap2016": 15
+  },
+  {
+    "code": "DZA",
+    "pWastePercap2016": 51
+  },
+  {
+    "code": "PAN",
+    "pWastePercap2016": 45
+  },
+  {
+    "code": "ZAF",
+    "pWastePercap2016": 25
+  },
+  {
+    "code": "GHA",
+    "pWastePercap2016": 7
+  },
+  {
+    "code": "ARG",
+    "pWastePercap2016": 60
+  },
+  {
+    "code": "SLE",
+    "pWastePercap2016": 8
+  },
+  {
+    "code": "TTO",
+    "pWastePercap2016": 101
+  },
+  {
+    "code": "MEX",
+    "pWastePercap2016": 47
+  },
+  {
+    "code": "PNG",
+    "pWastePercap2016": 12
+  },
+  {
+    "code": "LBR",
+    "pWastePercap2016": 11
+  },
+  {
+    "code": "MOZ",
+    "pWastePercap2016": 7
+  },
+  {
+    "code": "EGY",
+    "pWastePercap2016": 32
+  },
+  {
+    "code": "HND",
+    "pWastePercap2016": 33
+  },
+  {
+    "code": "USA",
+    "pWastePercap2016": 105
+  },
+  {
+    "code": "GIN",
+    "pWastePercap2016": 3
+  },
+  {
+    "code": "JAM",
+    "pWastePercap2016": 44
+  },
+  {
+    "code": "JPN",
+    "pWastePercap2016": 38
+  },
+  {
+    "code": "MAR",
+    "pWastePercap2016": 16
+  },
+  {
+    "code": "SUR",
+    "pWastePercap2016": 16
+  },
+  {
+    "code": "BEN",
+    "pWastePercap2016": 9
+  },
+  {
+    "code": "ALB",
+    "pWastePercap2016": 39
+  },
+  {
+    "code": "NIC",
+    "pWastePercap2016": 32
+  },
+  {
+    "code": "GUY",
+    "pWastePercap2016": 37
+  },
+  {
+    "code": "ECU",
+    "pWastePercap2016": 36
+  },
+  {
+    "code": "KHM",
+    "pWastePercap2016": 6
+  },
+  {
+    "code": "URY",
+    "pWastePercap2016": 40
+  },
+  {
+    "code": "IRN",
+    "pWastePercap2016": 18
+  },
+  {
+    "code": "LBY",
+    "pWastePercap2016": 27
+  },
+  {
+    "code": "PAK",
+    "pWastePercap2016": 13
+  },
+  {
+    "code": "AGO",
+    "pWastePercap2016": 22
+  },
+  {
+    "code": "UKR",
+    "pWastePercap2016": 23
+  },
+  {
+    "code": "SLV",
+    "pWastePercap2016": 28
+  },
+  {
+    "code": "MDG",
+    "pWastePercap2016": 11
+  },
+  {
+    "code": "TLS",
+    "pWastePercap2016": 8
+  },
+  {
+    "code": "GBR",
+    "pWastePercap2016": 98
+  },
+  {
+    "code": "TUN",
+    "pWastePercap2016": 26
+  },
+  {
+    "code": "LBN",
+    "pWastePercap2016": 36
+  },
+  {
+    "code": "RUS",
+    "pWastePercap2016": 58
+  },
+  {
+    "code": "TWN",
+    "pWastePercap2016": 59
+  },
+  {
+    "code": "CRI",
+    "pWastePercap2016": 34
+  },
+  {
+    "code": "LCA",
+    "pWastePercap2016": 95
+  },
+  {
+    "code": "GAB",
+    "pWastePercap2016": 19
+  },
+  {
+    "code": "TGO",
+    "pWastePercap2016": 15
+  },
+  {
+    "code": "COL",
+    "pWastePercap2016": 35
+  },
+  {
+    "code": "GMB",
+    "pWastePercap2016": 10
+  },
+  {
+    "code": "ITA",
+    "pWastePercap2016": 55
+  },
+  {
+    "code": "GNQ",
+    "pWastePercap2016": 16
+  },
+  {
+    "code": "KOR",
+    "pWastePercap2016": 88
+  },
+  {
+    "code": "BLZ",
+    "pWastePercap2016": 52
+  },
+  {
+    "code": "FJI",
+    "pWastePercap2016": 17
+  },
+  {
+    "code": "MAC",
+    "pWastePercap2016": 48
+  },
+  {
+    "code": "CHL",
+    "pWastePercap2016": 38
+  },
+  {
+    "code": "NLD",
+    "pWastePercap2016": 73
+  },
+  {
+    "code": "KEN",
+    "pWastePercap2016": 26
+  },
+  {
+    "code": "PER",
+    "pWastePercap2016": 29
+  },
+  {
+    "code": "YEM",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "GNB",
+    "pWastePercap2016": 12
+  },
+  {
+    "code": "CAN",
+    "pWastePercap2016": 21
+  },
+  {
+    "code": "FRA",
+    "pWastePercap2016": 43
+  },
+  {
+    "code": "ESP",
+    "pWastePercap2016": 39
+  },
+  {
+    "code": "HRV",
+    "pWastePercap2016": 92
+  },
+  {
+    "code": "GRC",
+    "pWastePercap2016": 73
+  },
+  {
+    "code": "SEN",
+    "pWastePercap2016": 14
+  },
+  {
+    "code": "SGP",
+    "pWastePercap2016": 143
+  },
+  {
+    "code": "DEU",
+    "pWastePercap2016": 81
+  },
+  {
+    "code": "BRN",
+    "pWastePercap2016": 82
+  },
+  {
+    "code": "GRD",
+    "pWastePercap2016": 48
+  },
+  {
+    "code": "MRT",
+    "pWastePercap2016": 27
+  },
+  {
+    "code": "IRL",
+    "pWastePercap2016": 82
+  },
+  {
+    "code": "HKG",
+    "pWastePercap2016": 163
+  },
+  {
+    "code": "SDN",
+    "pWastePercap2016": 9
+  },
+  {
+    "code": "SLB",
+    "pWastePercap2016": 69
+  },
+  {
+    "code": "VCT",
+    "pWastePercap2016": 24
+  },
+  {
+    "code": "ROU",
+    "pWastePercap2016": 31
+  },
+  {
+    "code": "PRT",
+    "pWastePercap2016": 49
+  },
+  {
+    "code": "PRI",
+    "pWastePercap2016": 134
+  },
+  {
+    "code": "NZL",
+    "pWastePercap2016": 57
+  },
+  {
+    "code": "IRQ",
+    "pWastePercap2016": 20
+  },
+  {
+    "code": "DMA",
+    "pWastePercap2016": 30
+  },
+  {
+    "code": "PRK",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "ERI",
+    "pWastePercap2016": 11
+  },
+  {
+    "code": "BRB",
+    "pWastePercap2016": 106
+  },
+  {
+    "code": "SYR",
+    "pWastePercap2016": 15
+  },
+  {
+    "code": "ESH",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "FSM",
+    "pWastePercap2016": 308
+  },
+  {
+    "code": "SWE",
+    "pWastePercap2016": 29
+  },
+  {
+    "code": "BEL",
+    "pWastePercap2016": 58
+  },
+  {
+    "code": "ISR",
+    "pWastePercap2016": 112
+  },
+  {
+    "code": "AUS",
+    "pWastePercap2016": 42
+  },
+  {
+    "code": "POL",
+    "pWastePercap2016": 35
+  },
+  {
+    "code": "MTQ",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "BHS",
+    "pWastePercap2016": 90
+  },
+  {
+    "code": "ARE",
+    "pWastePercap2016": 109
+  },
+  {
+    "code": "KAZ",
+    "pWastePercap2016": 72
+  },
+  {
+    "code": "EST",
+    "pWastePercap2016": 67
+  },
+  {
+    "code": "SVN",
+    "pWastePercap2016": 55
+  },
+  {
+    "code": "LVA",
+    "pWastePercap2016": 33
+  },
+  {
+    "code": "DNK",
+    "pWastePercap2016": 12
+  },
+  {
+    "code": "BGR",
+    "pWastePercap2016": 51
+  },
+  {
+    "code": "KWT",
+    "pWastePercap2016": 115
+  },
+  {
+    "code": "LTU",
+    "pWastePercap2016": 46
+  },
+  {
+    "code": "GUF",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "PLW",
+    "pWastePercap2016": 170
+  },
+  {
+    "code": "BIH",
+    "pWastePercap2016": 41
+  },
+  {
+    "code": "DJI",
+    "pWastePercap2016": 18
+  },
+  {
+    "code": "GLP",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "SAU",
+    "pWastePercap2016": 55
+  },
+  {
+    "code": "CYP",
+    "pWastePercap2016": 69
+  },
+  {
+    "code": "GEO",
+    "pWastePercap2016": 6
+  },
+  {
+    "code": "NAM",
+    "pWastePercap2016": 20
+  },
+  {
+    "code": "ATG",
+    "pWastePercap2016": 45
+  },
+  {
+    "code": "SOM",
+    "pWastePercap2016": 12
+  },
+  {
+    "code": "JOR",
+    "pWastePercap2016": 46
+  },
+  {
+    "code": "OMN",
+    "pWastePercap2016": 90
+  },
+  {
+    "code": "KNA",
+    "pWastePercap2016": 150
+  },
+  {
+    "code": "TUR",
+    "pWastePercap2016": 12
+  },
+  {
+    "code": "ZWE",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "BFA",
+    "pWastePercap2016": 12
+  },
+  {
+    "code": "COM",
+    "pWastePercap2016": 5
+  },
+  {
+    "code": "LSO",
+    "pWastePercap2016": 4
+  },
+  {
+    "code": "CPV",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "FIN",
+    "pWastePercap2016": 7
+  },
+  {
+    "code": "WSM",
+    "pWastePercap2016": 19
+  },
+  {
+    "code": "SVK",
+    "pWastePercap2016": 36
+  },
+  {
+    "code": "QAT",
+    "pWastePercap2016": 63
+  },
+  {
+    "code": "NOR",
+    "pWastePercap2016": 9
+  },
+  {
+    "code": "BHR",
+    "pWastePercap2016": 49
+  },
+  {
+    "code": "TON",
+    "pWastePercap2016": 23
+  },
+  {
+    "code": "MUS",
+    "pWastePercap2016": 42
+  },
+  {
+    "code": "MLT",
+    "pWastePercap2016": 71
+  },
+  {
+    "code": "ISL",
+    "pWastePercap2016": 144
+  },
+  {
+    "code": "KIR",
+    "pWastePercap2016": 52
+  },
+  {
+    "code": "MDV",
+    "pWastePercap2016": 14
+  },
+  {
+    "code": "SYC",
+    "pWastePercap2016": 56
+  },
+  {
+    "code": "MNE",
+    "pWastePercap2016": 100
+  },
+  {
+    "code": "MHL",
+    "pWastePercap2016": 19
+  },
+  {
+    "code": "MCO",
+    "pWastePercap2016": 13
+  },
+  {
+    "code": "ETH",
+    "pWastePercap2016": 1
+  },
+  {
+    "code": "UGA",
+    "pWastePercap2016": 16
+  },
+  {
+    "code": "AFG",
+    "pWastePercap2016": 11
+  },
+  {
+    "code": "UZB",
+    "pWastePercap2016": 3
+  },
+  {
+    "code": "NPL",
+    "pWastePercap2016": 9
+  },
+  {
+    "code": "NER",
+    "pWastePercap2016": 4
+  },
+  {
+    "code": "MLI",
+    "pWastePercap2016": 2
+  },
+  {
+    "code": "MWI",
+    "pWastePercap2016": 6
+  },
+  {
+    "code": "ZMB",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "TCD",
+    "pWastePercap2016": 6
+  },
+  {
+    "code": "RWA",
+    "pWastePercap2016": 28
+  },
+  {
+    "code": "BDI",
+    "pWastePercap2016": 9
+  },
+  {
+    "code": "BOL",
+    "pWastePercap2016": 21
+  },
+  {
+    "code": "CUB",
+    "pWastePercap2016": 23
+  },
+  {
+    "code": "CZE",
+    "pWastePercap2016": 7
+  },
+  {
+    "code": "AZE",
+    "pWastePercap2016": 23
+  },
+  {
+    "code": "HUN",
+    "pWastePercap2016": 49
+  },
+  {
+    "code": "TJK",
+    "pWastePercap2016": 20
+  },
+  {
+    "code": "BLR",
+    "pWastePercap2016": 53
+  },
+  {
+    "code": "AUT",
+    "pWastePercap2016": 62
+  },
+  {
+    "code": "CHE",
+    "pWastePercap2016": 108
+  },
+  {
+    "code": "LAO",
+    "pWastePercap2016": 3
+  },
+  {
+    "code": "SRB",
+    "pWastePercap2016": 41
+  },
+  {
+    "code": "PRY",
+    "pWastePercap2016": 31
+  },
+  {
+    "code": "KGZ",
+    "pWastePercap2016": 20
+  },
+  {
+    "code": "TKM",
+    "pWastePercap2016": 2
+  },
+  {
+    "code": "CAF",
+    "pWastePercap2016": 18
+  },
+  {
+    "code": "MNG",
+    "pWastePercap2016": 137
+  },
+  {
+    "code": "MDA",
+    "pWastePercap2016": 130
+  },
+  {
+    "code": "ARM",
+    "pWastePercap2016": 19
+  },
+  {
+    "code": "BWA",
+    "pWastePercap2016": 11
+  },
+  {
+    "code": "BTN",
+    "pWastePercap2016": 26
+  },
+  {
+    "code": "LUX",
+    "pWastePercap2016": 111
+  },
+  {
+    "code": "VUT",
+    "pWastePercap2016": 16
+  },
+  {
+    "code": "PYF",
+    "pWastePercap2016": 10
+  },
+  {
+    "code": "NCL",
+    "pWastePercap2016": 63
+  },
+  {
+    "code": "GUM",
+    "pWastePercap2016": 102
+  },
+  {
+    "code": "ABW",
+    "pWastePercap2016": 132
+  },
+  {
+    "code": "IMN",
+    "pWastePercap2016": 83
+  },
+  {
+    "code": "AND",
+    "pWastePercap2016": 63
+  },
+  {
+    "code": "CYM",
+    "pWastePercap2016": 133
+  },
+  {
+    "code": "BMU",
+    "pWastePercap2016": 205
+  },
+  {
+    "code": "GRL",
+    "pWastePercap2016": 22
+  },
+  {
+    "code": "FRO",
+    "pWastePercap2016": 167
+  },
+  {
+    "code": "MNP",
+    "pWastePercap2016": 90
+  },
+  {
+    "code": "TCA",
+    "pWastePercap2016": -9220000000000000000
+  },
+  {
+    "code": "ASM",
+    "pWastePercap2016": 43
+  },
+  {
+    "code": "LIE",
+    "pWastePercap2016": 50
+  },
+  {
+    "code": "SMR",
+    "pWastePercap2016": 28
+  },
+  {
+    "code": "GIB",
+    "pWastePercap2016": 88
+  },
+  {
+    "code": "VGB",
+    "pWastePercap2016": 90
+  },
+  {
+    "code": "NRU",
+    "pWastePercap2016": 68
+  },
+  {
+    "code": "TUV",
+    "pWastePercap2016": 58
+  }
+];
+
+    map.on('load', () => {
+        // Add source for country polygons using the Mapbox Countries tileset
+        // The polygons contain an ISO 3166 alpha-3 code which can be used to for joining the data
+        // https://docs.mapbox.com/vector-tiles/reference/mapbox-countries-v1
+        map.addSource('countries', {
+            type: 'vector',
+            url: 'mapbox://mapbox.country-boundaries-v1'
+        });
+
+        // Build a GL match expression that defines the color for every vector tile feature
+        // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
+        const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
+
+        // Calculate color values for each country based on 'pWaste2016' value
+        for (const row of data) {
+            // Convert the range of data values to a suitable color
+            const green = row['pWastePercap2016'] * 10;
+            const color = `rgb(0, 0, ${green})`;
+
+            matchExpression.push(row['code'], color);
+        }
+
+        // Last value is the default, used where there is no data
+        matchExpression.push('rgba(0, 0, 0, 0)');
+
+        // Add layer from the vector tile source to create the choropleth
+        // Insert it below the 'admin-1-boundary-bg' layer in the style
+        map.addLayer(
+            {
+                'id': 'countries-join',
+                'type': 'fill',
+                'source': 'countries',
+                'source-layer': 'country_boundaries',
+                'paint': {
+                    'fill-color': matchExpression,
+                    'fill-opacity': 0.2
+                }
+            },
+            'admin-1-boundary-bg'
+        );
+    });
+
+    map.addControl(new mapboxgl.NavigationControl());
+
+    
+</script>
 
 </body>
-
 </html>

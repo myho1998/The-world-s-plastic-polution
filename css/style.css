@@ -68,6 +68,8 @@ p {
     height: 120px;
     margin-top: 20px;
     width: 300px;
+    color: white;
+    opacity: 0.7;
 }
 
 /* each line for a break */
