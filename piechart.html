@@ -1,204 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <h1 class="heading">Food consumption in a city</h1>
-    <div class="wrapper">
+<html>
+	<head>
+		<title>Global Exports in 2010</title>
+		<link rel='css' href='css/style.css' />
+		<link rel='css' href='css/bootstrap.min.css' />
+		<link rel='css' href='css/font-awesome.min.css' />
 
-    <div class="pie-wrap">
+		<!-- Load c3.css -->
+		<link href="css/c3.css" rel="stylesheet" type="text/css">
 
-        <div class="light-yellow entry">
-            <p>25%</p>
-            <p class="entry-value">Rice</p>
-        </div>
-        
-        <div class="sky-blue entry">
-            <p>25%</p>
-            <p class="entry-value">Pasta</p>
-        </div>
-        
-        <div class="pink entry">
-            <p>12.5%</p>
-            <p class="entry-value">Beans </p>
-        </div>
-        
+		<!-- Load d3.js and c3.js -->
+		<script src="js/d3.v3.min.js" charset="utf-8"></script>
+		<script src="js/c3.min.js"></script>
 
-    <div class="key-wrap">
-        <input type="radio" id="rice" name="values" class="rice-key"/>
-        <label for="rice" class="rice-label">Rice</label>
+		<!-- Load papaparse.js -->
+		<script src="js/papaparse.min.js"></script>
+  	</head>
+  	<body>
+  	
+	<br><br><br>
+    	
+	<div class="container">
+    		<div id="chart"></div>
+    	</div>
 
-        <input type="radio" name="values" id="beans" class="beans-key"/>
-        <label for="beans" class="beans-label"> Beans</label>
-
-        <input type="radio" name="values" id="plantain" class="plantain-key"/>
-        <label for="plantain" class="plantain-label"> Plantain</label>
-
-        <input type="radio" name="values" id="potato" class="potato-key"/>
-        <label for="potato" class="potato-label"> Potato</label>
-
-        <input type="radio" name="values" id="yam" class="yam-key"/>
-        <label for="yam" class="yam-label"> Yam</label>
-
-        <input type="radio" name="values" id="pasta" class="pasta-key"/>
-        <label for="pasta" class="pasta-label"> Pasta</label>
-    </div>
-
-    </div>
-    
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="styles.css">
-<title>Pie chart</title>
-<style>
-    body{
-    font-family: Helvetica, sans-serif;
-}
-
-.heading{
-    text-align: center;
-    margin-top: 50px;
-}
-.wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pie-wrap{
-    border: 2px solid lightgrey;
-    width: 400px;
-    height: 400px;
-    margin: 10% 50px;
-    position: relative;
-    border-radius: 50%;
-    color: black;
-}
-.pie-wrap .entry{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* *the individual entries* */
-
-.sky-blue{
-    background-color: lightskyblue;
-    height:50%;
-    width: 50%;
-    display: block;
-}
-
-.light-yellow{
-    background-color: lightyellow;
-    height:50%;
-    width: 50%;
-}
-.pink{
-    background-color: pink;
-    height:50%;
-    position: absolute;
-    top: 0px;
-    right: 0;
-    width: 50%;
-    clip-path: polygon(0 0, 100% 0%, 0% 100%);
-}
-
-.purple{
-    background-color: purple;
-    height:50%;
-    width: 50%;
-    right: 0;
-    top: 0;
-    position: absolute;
-    clip-path:polygon(0% 100%, 100% 0%, 100% 100%);
-}
-
-.green{
-    background-color: limegreen;
-    height:50%;
-    width: 50%;
-    right: 0;
-    top: 50%;
-    position: absolute;
-    clip-path:polygon(0% 0%, 100% 0%, 100% 100%);
-}
-
-.wheat{
-    background-color: wheat;
-    height:50%;
-    width: 50%;
-    right: 0;
-    top: 50%;
-    position: absolute;
-    clip-path:polygon(0% 0%, 100% 100%, 0% 100%);
-}
-.pie-wrap .purple p{
-    position: absolute;
-    top: 140px;
-    color: white;
-}
-.pie-wrap .purple p:first-child{
-    top: 120px;
-}
-
-.pie-wrap .green p{
-    position: absolute;
-    top: 20px;
-}
-
-.pie-wrap .green p:first-child{
-    top: 0px;
-}
-
-.pie-wrap .pink p, .pie-wrap .wheat p{
-    position: absolute;
-    left: 20px;
-    top: 80px;
-}
-
-.pie-wrap .pink, .pie-wrap .wheat{
-    justify-content: flex-start;
-}
-
-.pie-wrap .pink p:first-child, .pie-wrap .wheat p:first-child{
-    top: 100px;
-}
-.pie-wrap{
-    border: 2px solid lightgrey;
-    width: 400px;
-    height: 400px;
-    margin: 10% 50px;
-    position: relative;
-    border-radius: 50%;
-    color: black;
-    overflow: hidden;
-}
-.entry .entry-value{
-    display: none;
-    transition: all 500ms linear;
-}
-.entry:hover .entry-value{
-    display: block;
-}
-.entry{
-    transition: all 500ms linear ;
-}
-.entry:hover{
-    filter: invert();
-}
-.key-wrap label{
-    display: block;
-    border: 1px solid;
-    width: 50px;
-    text-align: center;
-    padding: 10px 15px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    }
-
- </style>
-</head>
-<body>
-</body>
+	<script src="js/create-graph.js"></script>
+  	</body>
 </html>
