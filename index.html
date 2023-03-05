@@ -11,7 +11,7 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Plastic Production( Million tonnes)'],
+          ['Year', 'Plastic Production (Million tonnes)'],
           ['1950',  2],
           ['1960',  8],
           ['1970',  35],
@@ -23,7 +23,6 @@
         ]);
       
         var options = {
-          title: 'Global Plastics Production',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -32,6 +31,7 @@
 
         chart.draw(data, options);
       }
+
     </script>
     
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
@@ -41,16 +41,20 @@
 </head>
 <body>
     <script src="./assets/data_for_choropleth.js"></script>
+
+    
     <div class="container">
         <div class="widgets">
+
             <div class="widget-background"></div>
             <div class="widget" style="height: 50%">
-                <h2>Line Chart</h2>
-                <div id="curve_chart" style="width: 500px; height: 400px"></div>
+                <h2>Global Plastics Production</h2>
+                <div id="curve_chart"></div>
             </div>
+
             <div class="widget" style="height: 50%">
                 <h2>Pie Chart</h2>
-                <p>add stuff for piechart</p>
+                add pie chart here
             </div>
         </div>
         <div id="map" class="map"></div>
@@ -65,9 +69,7 @@
             center: [12, 50],
             zoom: 2.2
         });
-    
-        
-    
+
         map.on('load', () => {
             // Add source for country polygons using the Mapbox Countries tileset
             // The polygons contain an ISO 3166 alpha-3 code which can be used to for joining the data
@@ -76,7 +78,6 @@
                 type: 'vector',
                 url: 'mapbox://mapbox.country-boundaries-v1'
             });
-    
             // Build a GL match expression that defines the color for every vector tile feature
             // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
             const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
@@ -109,10 +110,8 @@
                 'admin-1-boundary-bg'
             );
         });
-    
-        map.addControl(new mapboxgl.NavigationControl());
-    
         
+        map.addControl(new mapboxgl.NavigationControl());
     </script>
 </body>
 </html>
