@@ -1,79 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Global Plastic Pollution</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
+    <title>My Website</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <link href="./css/style.css" rel="stylesheet" />  
+    
 </head>
 <body>
+    <script src="./assets/data_for_choropleth.js"></script>
+    <div class="container">
+        <div class="widgets">
+            <div class="widget">
+                <h2>Widget 1</h2>
+                <p>Line Chart</p>
+            </div>
+            <div class="widget">
+                <h2>Widget 2</h2>
+                <p>Pie Chart</p>
+            </div>
+        </div>
+        <div id="map" class="map"></div>
+    </div>
 
-  <script src="./assets/data_for_choropleth.js"></script>
-  
-<div id="map"></div>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/dark-v11',
-        center: [12, 50],
-        zoom: 2.2
-    });
-
-    
-
-    map.on('load', () => {
-        // Add source for country polygons using the Mapbox Countries tileset
-        // The polygons contain an ISO 3166 alpha-3 code which can be used to for joining the data
-        // https://docs.mapbox.com/vector-tiles/reference/mapbox-countries-v1
-        map.addSource('countries', {
-            type: 'vector',
-            url: 'mapbox://mapbox.country-boundaries-v1'
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+            style: 'mapbox://styles/mapbox/dark-v11',
+            center: [12, 50],
+            zoom: 2.2
         });
-
-        // Build a GL match expression that defines the color for every vector tile feature
-        // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
-        const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
-
-        // Calculate color values for each country based on 'pWaste2016' value
-        for (const row of data) {
-            // Convert the range of data values to a suitable color
-            const green = row['pWastePercap2016'] * 10;
-            const color = `rgb(0, 0, ${green})`;
-
-            matchExpression.push(row['cca3'], color);
-        }
-
-        // Last value is the default, used where there is no data
-        matchExpression.push('rgba(0, 0, 0, 0)');
-
-        // Add layer from the vector tile source to create the choropleth
-        // Insert it below the 'admin-1-boundary-bg' layer in the style
-        map.addLayer(
-            {
-                'id': 'countries-join',
-                'type': 'fill',
-                'source': 'countries',
-                'source-layer': 'country_boundaries',
-                'paint': {
-                    'fill-color': matchExpression,
-                    'fill-opacity': 0.2
-                }
-            },
-            'admin-1-boundary-bg'
-        );
-    });
-
-    map.addControl(new mapboxgl.NavigationControl());
-
     
-</script>
-
+        
+    
+        map.on('load', () => {
+            // Add source for country polygons using the Mapbox Countries tileset
+            // The polygons contain an ISO 3166 alpha-3 code which can be used to for joining the data
+            // https://docs.mapbox.com/vector-tiles/reference/mapbox-countries-v1
+            map.addSource('countries', {
+                type: 'vector',
+                url: 'mapbox://mapbox.country-boundaries-v1'
+            });
+    
+            // Build a GL match expression that defines the color for every vector tile feature
+            // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
+            const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
+    
+            // Calculate color values for each country based on 'pWaste2016' value
+            for (const row of data) {
+                // Convert the range of data values to a suitable color
+                const green = row['pWastePercap2016'] * 10;
+                const color = `rgb(0, 0, ${green})`;
+    
+                matchExpression.push(row['cca3'], color);
+            }
+    
+            // Last value is the default, used where there is no data
+            matchExpression.push('rgba(0, 0, 0, 0)');
+    
+            // Add layer from the vector tile source to create the choropleth
+            // Insert it below the 'admin-1-boundary-bg' layer in the style
+            map.addLayer(
+                {
+                    'id': 'countries-join',
+                    'type': 'fill',
+                    'source': 'countries',
+                    'source-layer': 'country_boundaries',
+                    'paint': {
+                        'fill-color': matchExpression,
+                        'fill-opacity': 0.2
+                    }
+                },
+                'admin-1-boundary-bg'
+            );
+        });
+    
+        map.addControl(new mapboxgl.NavigationControl());
+    
+        
+    </script>
 </body>
 </html>
