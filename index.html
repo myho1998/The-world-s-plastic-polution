@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Website</title>
+    <title>Global Plastic Pollution</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Plastic Production( Million tonnes)'],
+          ['1950',  2],
+          ['1960',  8],
+          ['1970',  35],
+          ['1980',  70],
+          ['1990',  120],
+          ['2000',  213],
+          ['2010',  313],
+          ['2019',  459.75],
+        ]);
+      
+        var options = {
+          title: 'Global Plastics Production',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
     
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
     <link href="./css/style.css" rel="stylesheet" />  
     
+    </style>
 </head>
 <body>
     <script src="./assets/data_for_choropleth.js"></script>
     <div class="container">
         <div class="widgets">
-            <div class="widget">
-                <h2>Widget 1</h2>
-                <p>Line Chart</p>
+            <div class="widget-background"></div>
+            <div class="widget" style="height: 50%">
+                <h2>Line Chart</h2>
+                <div id="curve_chart" style="width: 500px; height: 400px"></div>
             </div>
-            <div class="widget">
-                <h2>Widget 2</h2>
-                <p>Pie Chart</p>
+            <div class="widget" style="height: 50%">
+                <h2>Pie Chart</h2>
+                <p>add stuff for piechart</p>
             </div>
         </div>
         <div id="map" class="map"></div>
