@@ -34,15 +34,6 @@ function createGraph(data) {
         		onmouseout: function (d, i) { console.log("onmouseout", d, i); }
             },
 
-			size: {
-				width: 500,
-				height: 500
-			},
-
-			zoom: {
-				enabled: true
-			},
-
             legend: {
                 show: false
             }
