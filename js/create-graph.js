@@ -12,15 +12,19 @@ function createGraph(data) {
     var Country = [];
     var Exports = [];
     // All non-country entries in the global_waste_exports_2010.csv file
-    var non_countries = ["Africa", "Asia", "Europe", "North America", "South America", "Oceania", 
-    "Low-income countries", "Lower-middle-income countries", "Upper-middle-income countries", 
-    "High-income countries", "World"];
-    
+    // Separated in case we want to introduce functionality to change from a country-level view
+    // to a continent/income-level view
+    let continents = ["Africa", "Asia", "Europe", "North America", "South America", "Oceania"];
+    let income_levels = ["Low-income countries", "Lower-middle-income countries", "Upper-middle-income countries", 
+    "High-income countries"];
+
     for (var i = 0; i < data.length; i++) {
         // Temporary fix so that the pie chart doesn't display any non-country values (e.g., Africa, World, etc.)
-        if (!non_countries.includes(data[i][0])) {
+        if (!continents.includes(data[i][0]) && !income_levels.includes(data[i][0]) && data[i][0] != "World") {
             Country.push(data[i][0]);
             Exports.push(data[i][2]);
+        } else {
+            console.log("Excluded: " + data[i][0]);
         }
     }
     
