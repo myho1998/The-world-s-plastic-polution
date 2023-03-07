@@ -1,138 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
+
+  <head>
     <title>Global Plastic Pollution</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
+      google.charts.load('current', {
+        'packages': ['corechart']
+      });
+
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Plastic Production (Million tonnes)'],
-          ['1950',  2],
-          ['1960',  8],
-          ['1970',  35],
-          ['1980',  70],
-          ['1990',  120],
-          ['2000',  213],
-          ['2010',  313],
-          ['2019',  459.75],
+          ['1950', 2],
+          ['1960', 8],
+          ['1970', 35],
+          ['1980', 70],
+          ['1990', 120],
+          ['2000', 213],
+          ['2010', 313],
+          ['2019', 459.75],
         ]);
-      
+
         var options = {
           curveType: 'function',
-          legend: { position: 'bottom' }
+          legend: {
+            position: 'bottom'
+          }
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
         chart.draw(data, options);
       }
-
     </script>
-    
+
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
-    <link href="./css/style.css" rel="stylesheet" />  
-    
-    </style>
-</head>
-<body>
+    <link href="./css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
     <script src="./assets/data_for_choropleth.js"></script>
 
-    
     <div class="container">
-        <div class="widgets">
+      <div class="widgets">
+        <div class="widget-background"></div>
 
-            <div class="widget-background"></div>
-            <div class="widget" style="height: 50%">
-                <h2>Global Plastics Production</h2>
-                <div id="curve_chart"></div>
-            </div>
+        <div class="widget" style="height: 50%">
+          <h2>Global Plastics Production</h2>
+          <div id="curve_chart"></div>
+        </div> <!-- "widget" div -->
 
-            <div class="widget" style="height: 50%">
-                <h2>Global Plastic Exported</h2>
+        <div class="widget" style="height: 50%">
+          <h2>Global Plastic Exported</h2>
+          <link rel='css' href='css/style.css' />
+          <link rel='css' href='css/bootstrap.min.css' />
+          <link rel='css' href='css/font-awesome.min.css' />
 
-                <link rel='css' href='css/style.css' />
-                <link rel='css' href='css/bootstrap.min.css' />
-                <link rel='css' href='css/font-awesome.min.css' />
+          <!-- Load c3.css -->
+          <link href="css/c3.css" rel="stylesheet" type="text/css">
 
-                <!-- Load c3.css -->
-                <link href="css/c3.css" rel="stylesheet" type="text/css">
-        
-                <!-- Load d3.js and c3.js -->
-                <script src="js/d3.v3.min.js" charset="utf-8"></script>
-                <script src="js/c3.min.js"></script>
-        
-                <!-- Load papaparse.js -->
-                <script src="js/papaparse.min.js"></script>
-              </head>
-              <body>
+          <!-- Load d3.js and c3.js -->
+          <script src="js/d3.v3.min.js" charset="utf-8"></script>
+          <script src="js/c3.min.js"></script>
+          
+          <!-- Load papaparse.js -->
+          <script src="js/papaparse.min.js"></script>
+          <div class="container">
+            <div id="chart"></div>
+          </div>
+          <script src="js/create-graph.js"></script>
+        </div> <!-- "widget" div -->
 
-            <div class="container">
-                    <div id="chart"></div>
-                </div>
-        
-            <script src="js/create-graph.js"></script>
-            </div>
-        </div>
-        <div id="map" class="map"></div>
-    </div>
+      </div> <!-- "widgets" div -->
+      <div id="map" class="map"></div>
+    </div> <!-- "container" div -->
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
-        const map = new mapboxgl.Map({
-            container: 'map',
-            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-            style: 'mapbox://styles/mapbox/dark-v11',
-            center: [12, 50],
-            zoom: 2.2
+      mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
+      
+      const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [12, 50],
+        zoom: 2.2
+      });
+
+      map.on('load', () => {
+        // Add source for country polygons using the Mapbox Countries tileset
+        // The polygons contain an ISO 3166 alpha-3 code which can be used to for joining the data
+        // https://docs.mapbox.com/vector-tiles/reference/mapbox-countries-v1
+        map.addSource('countries', {
+          type: 'vector',
+          url: 'mapbox://mapbox.country-boundaries-v1'
         });
 
-        map.on('load', () => {
-            // Add source for country polygons using the Mapbox Countries tileset
-            // The polygons contain an ISO 3166 alpha-3 code which can be used to for joining the data
-            // https://docs.mapbox.com/vector-tiles/reference/mapbox-countries-v1
-            map.addSource('countries', {
-                type: 'vector',
-                url: 'mapbox://mapbox.country-boundaries-v1'
-            });
-            // Build a GL match expression that defines the color for every vector tile feature
-            // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
-            const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
-    
-            // Calculate color values for each country based on 'pWaste2016' value
-            for (const row of data) {
-                // Convert the range of data values to a suitable color
-                const green = row['pWastePercap2016'] * 10;
-                const color = `rgb(0, 0, ${green})`;
-    
-                matchExpression.push(row['cca3'], color);
-            }
-    
-            // Last value is the default, used where there is no data
-            matchExpression.push('rgba(0, 0, 0, 0)');
-    
-            // Add layer from the vector tile source to create the choropleth
-            // Insert it below the 'admin-1-boundary-bg' layer in the style
-            map.addLayer(
-                {
-                    'id': 'countries-join',
-                    'type': 'fill',
-                    'source': 'countries',
-                    'source-layer': 'country_boundaries',
-                    'paint': {
-                        'fill-color': matchExpression,
-                        'fill-opacity': 0.2
-                    }
-                },
-                'admin-1-boundary-bg'
-            );
-        });
-        
-        map.addControl(new mapboxgl.NavigationControl());
+        // Build a GL match expression that defines the color for every vector tile feature
+        // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
+        const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
+
+        // Calculate color values for each country based on 'pWaste2016' value
+        for (const row of data) {
+          // Convert the range of data values to a suitable color
+          const green = row['pWastePercap2016'] * 10;
+          const color = `rgb(0, 0, ${green})`;
+          matchExpression.push(row['cca3'], color);
+        }
+
+        // Last value is the default, used where there is no data
+        matchExpression.push('rgba(0, 0, 0, 0)');
+
+        // Add layer from the vector tile source to create the choropleth
+        // Insert it below the 'admin-1-boundary-bg' layer in the style
+        map.addLayer({
+          'id': 'countries-join',
+          'type': 'fill',
+          'source': 'countries',
+          'source-layer': 'country_boundaries',
+          'paint': {
+            'fill-color': matchExpression,
+            'fill-opacity': 0.2
+          }
+        }, 'admin-1-boundary-bg');
+      });
+
+      map.addControl(new mapboxgl.NavigationControl());
     </script>
-</body>
+  </body>
+
 </html>
