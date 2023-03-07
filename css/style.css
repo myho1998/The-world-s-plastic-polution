@@ -75,13 +75,14 @@ p {
     margin: 10px;
 }
 
-/* Dropdown button styling */
+/* Dropdown menu styling */
 .dropbtn {
-    background-color: #04AA6D;
+    background-color: #673dca;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
+    border-radius: 10px;
   }
   
   .dropdown {
@@ -109,8 +110,7 @@ p {
   
   .dropdown:hover .dropdown-content {display: block;}
   
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
-
+  .dropdown:hover .dropbtn {background-color: #673dca;}
 /* End of dropdown button styling */
 
 #title {
@@ -211,4 +211,3 @@ p {
 .mapboxgl-ctrl-group button.mapboxgl-ctrl-compass {
     cursor: unset;
 }
-

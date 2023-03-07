@@ -1,30 +1,27 @@
-function parseData(value, createGraph) {
+function parseData(selection, createGraph) {
     Papa.parse("../assets/global_waste_exports_2010.csv", {
         download: true,
         complete: function(results) {
-            createGraph(value, results.data);
+            createGraph(selection, results.data);
         }
     });
 }
 
 
-function createGraph(value, data) {
-    console.log(value);
+function createGraph(selection, data) {
     var Country = [];
     var Exports = [];
     // All non-country entries in the global_waste_exports_2010.csv file
-    // Separated in case we want to introduce functionality to change from a country-level view
-    // to a continent/income-level view
+    // Separated so we can easily do different views
     let continents = ["Africa", "Asia", "Europe", "North America", "South America", "Oceania"];
     let income_levels = ["Low-income countries", "Lower-middle-income countries", "Upper-middle-income countries",
-        "High-income countries"
-    ];
+        "High-income countries"];
 
-    switch (value) {
+    // Not the world's most efficient code, but it works
+    switch (selection) {
         case "Country":
-            console.log("Success 1");
             for (var i = 0; i < data.length; i++) {
-                // Temporary fix so that the pie chart doesn't display any non-country values (e.g., Africa, World, etc.)
+                // Just countries
                 if (!continents.includes(data[i][0]) && !income_levels.includes(data[i][0]) && data[i][0] != "World") {
                     Country.push(data[i][0]);
                     Exports.push(data[i][2]);
@@ -34,9 +31,8 @@ function createGraph(value, data) {
             }
             break;
         case "Continent":
-            console.log("Success 2");
+            // Just continents
             for (var i = 0; i < data.length; i++) {
-                // Temporary fix so that the pie chart doesn't display any non-country values (e.g., Africa, World, etc.)
                 if (continents.includes(data[i][0])) {
                     Country.push(data[i][0]);
                     Exports.push(data[i][2]);
@@ -46,9 +42,8 @@ function createGraph(value, data) {
             }
             break;
         case "Income Level":
-            console.log("Success 3");
+            // Just income levels
             for (var i = 0; i < data.length; i++) {
-                // Temporary fix so that the pie chart doesn't display any non-country values (e.g., Africa, World, etc.)
                 if (income_levels.includes(data[i][0])) {
                     Country.push(data[i][0]);
                     Exports.push(data[i][2]);
@@ -58,23 +53,11 @@ function createGraph(value, data) {
             }
             break;
         default:
-            console.log("Error");
+            console.log("Error: default value reached in switch statement");
     }
 
-    /*
-    for (var i = 0; i < data.length; i++) {
-        // Temporary fix so that the pie chart doesn't display any non-country values (e.g., Africa, World, etc.)
-        if (!continents.includes(data[i][0]) && !income_levels.includes(data[i][0]) && data[i][0] != "World") {
-            Country.push(data[i][0]);
-            Exports.push(data[i][2]);
-        } else {
-            console.log("Excluded: " + data[i][0]);
-        }
-    }
-    */
-
-    console.log(Country);
-    console.log(Exports);
+    // console.log(Country);
+    // console.log(Exports);
 
     var summary = c3.generate({
         bindto: '#chart',
@@ -100,18 +83,16 @@ function createGraph(value, data) {
             show: false
         }
     });
-
 }
 
-parseData("Country", createGraph);
 
-function myFunction(value) {
-    console.log(value);
-    var elem = document.getElementById("pie_selector1");
-    if (elem.innerHTML === value) {
-        console.log("same");
-    } else {
-        elem.innerHTML = value;
-        parseData(value, createGraph);
+function selectView(selection) {
+    var elem = document.getElementById("pie_selector");
+    if (elem.innerHTML != selection) {
+        elem.innerHTML = selection;
+        parseData(selection, createGraph);
     }
 }
+
+
+parseData("Country", createGraph);
