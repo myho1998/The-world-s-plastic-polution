@@ -10,11 +10,18 @@ function parseData(createGraph) {
 
 function createGraph(data) {
     var Country = [];
-    var Exports = ["Exports"];
+    var Exports = [];
+    // All non-country entries in the global_waste_exports_2010.csv file
+    var non_countries = ["Africa", "Asia", "Europe", "North America", "South America", "Oceania", 
+    "Low-income countries", "Lower-middle-income countries", "Upper-middle-income countries", 
+    "High-income countries", "World"];
     
     for (var i = 0; i < data.length; i++) {
-        Country.push(data[i][0]);
-        Exports.push(data[i][2])
+        // Temporary fix so that the pie chart doesn't display any non-country values (e.g., Africa, World, etc.)
+        if (!non_countries.includes(data[i][0])) {
+            Country.push(data[i][0]);
+            Exports.push(data[i][2]);
+        }
     }
     
     console.log(Country);
