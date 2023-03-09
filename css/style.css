@@ -248,3 +248,13 @@ p {
   .nav__links li a:hover {
     color: #0088a9;
   }
+  
+  /* Changes color of "a" hyperlink */
+  a:link, a:visited {
+
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
