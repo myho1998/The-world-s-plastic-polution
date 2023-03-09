@@ -91,7 +91,16 @@ function createGraph(selection, data) {
             show: false
         }
     });
-    setTimeout(function () { chart.load({columns: data}); }, 500);
+    
+    // Set a timeout so that we can ensure that the `chart` element is created.
+    function onReady(selector, callback) {
+        var intervalID = window.setInterval(function() {
+          if (document.querySelector(selector) !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+          }
+        }, 500);
+      }
 }
 
 
