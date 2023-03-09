@@ -1,3 +1,4 @@
+// Loads data from global waste exports in 2010 csv
 function parseData(selection, createGraph) {
     Papa.parse("./assets/global_waste_exports_2010.csv", {
         download: true,
@@ -59,7 +60,7 @@ function createGraph(selection, data) {
     // console.log(Country);
     // console.log(Exports);
 
-
+    // Creates the pie chart
     var summary = c3.generate({
         bindto: '#chart',
         data: {
@@ -79,7 +80,8 @@ function createGraph(selection, data) {
                 console.log("onmouseout", d, i);
             }
         },
-
+        
+        // Creates label to show number of exports for each countries when hovered
         tooltip: {
             format: {
                 value: function (value, ratio, id) {

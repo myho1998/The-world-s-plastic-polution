@@ -24,9 +24,12 @@
           </ul>
       </nav>
   </header>  
-
+  <!--  -->
     <script src="./assets/data_for_choropleth.js"></script>
 
+
+
+    <!-- LINE GRAPH SECTION -->
     <div class="container">
       <div class="widgets">
         <div class="widget-background"></div>
@@ -36,6 +39,11 @@
           <p>The following line graph uses data from: <a href="https://github.com/myho1998/The-world-s-plastic-polution/blob/main/assets/global-plastic-production.csv" target="_blank">Global Plastic Production Dataset.</a>. </p> 
           <p>The following line graph displays global plastic production vs global plastic recycled in 1950-2019 period. The gap between the production and recycled management are huge. Only 9% of plastic waste is recycled (15% is collected for recycling but 40% of that is disposed of as residues).  </p>
         </div>
+        <!--  -->
+
+
+
+        <!-- PIE CHART SECTION -->
         <!-- "widget" div -->
         <div class="widget" style="height: 50%">
           <h2>Plastic Exports by</h2>
@@ -64,16 +72,22 @@
           <div class="container">
             <div id="chart"></div>
           </div>
+
+          <!-- Loads pie chart -->
           <script src="js/export_pie_chart.js"></script>
+          <!-- Description of pie chart -->
           <p>The following pie chart uses data from: <a href="https://github.com/myho1998/The-world-s-plastic-polution/blob/main/assets/global_waste_exports_2010.csv" target="_blank">Global Waste Exports 2010 Dataset.</a>. </p> 
           <p>The following pie chart displays global plastic exports between different countries, continents, and income level in 2010. The following chart shows each group's global share for exports relative to their counterparts, while also displaying the exact amount when hovered over. </p>
         </div> <!-- "widget" div -->
+
+        <!-- Loads line graph chart -->
         <script src="js/linegraph.js"></script>
       </div> <!-- "widgets" div -->
       <div id="map" class="map"></div>
     </div> <!-- "container" div -->
   
 
+    <!-- CHLOROPETH MAP SECTION -->
     <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
       const map = new mapboxgl.Map({
@@ -111,6 +125,9 @@
       });
       map.addControl(new mapboxgl.NavigationControl());
     </script>
+    <!--  -->
+
+
 
   </body>
 </html>

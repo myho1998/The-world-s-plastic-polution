@@ -44,7 +44,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
     margin-top: 10px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .widget h2 {
@@ -258,3 +258,4 @@ p {
     text-decoration: none;
     display: inline-block;
   }
+
