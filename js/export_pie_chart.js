@@ -59,6 +59,7 @@ function createGraph(selection, data) {
     // console.log(Country);
     // console.log(Exports);
 
+
     var summary = c3.generate({
         bindto: '#chart',
         data: {
@@ -91,6 +92,7 @@ function createGraph(selection, data) {
             show: false
         }
     });
+
 }
 
 

@@ -17,7 +17,9 @@ function drawChart() {
   var options = {
     title: 'Million tonnes by years',
     curveType: 'function',
-    legend: { position: 'bottom' }
+    legend: { position: 'bottom' },
+    width: 500,  
+    height: 300
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
