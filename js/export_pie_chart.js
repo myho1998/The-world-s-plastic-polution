@@ -79,6 +79,14 @@ function createGraph(selection, data) {
             }
         },
 
+        tooltip: {
+            format: {
+                value: function (value, ratio, id) {
+                    return `${value} Exports`;
+                }
+            }
+        },
+
         legend: {
             show: false
         }
