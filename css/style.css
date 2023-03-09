@@ -248,9 +248,3 @@ p {
   .nav__links li a:hover {
     color: #0088a9;
   }
-
-  /* popup */
-  .mapboxgl-popup {
-    max-width: 400px;
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  }

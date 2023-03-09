@@ -1,5 +1,5 @@
 function parseData(selection, createGraph) {
-    Papa.parse("../assets/global_waste_exports_2010.csv", {
+    Papa.parse("./assets/global_waste_exports_2010.csv", {
         download: true,
         complete: function(results) {
             createGraph(selection, results.data);
