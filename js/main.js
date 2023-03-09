@@ -76,6 +76,10 @@ async function geojsonFetch() {
         // create legend
         const legend = document.getElementById('legend');
         legend.innerHTML = "<b><center><span style='color: white;'>Covid-19 Cases (per thousand residents)</center><br>";
+        const source =
+    '<p style="text-align: center; font-size:10pt">Source: <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/">USDA</a></p>';
+
+        legend.innerHTML = legend.innerHTML + source;
 
         layers.forEach((layer, i) => {
             const color = colors[i];

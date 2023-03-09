@@ -92,6 +92,7 @@
           </div>
           <script src="js/create-graph.js"></script>
         </div> <!-- "widget" div -->
+        <div class="map" id="legend"></div>
       </div> <!-- "widgets" div -->
       <div id="map" class="map"></div>
     </div> <!-- "container" div -->
@@ -101,7 +102,7 @@
       const map = new mapboxgl.Map({
         container: 'map',
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/mapbox/light-v11',
         center: [12, 50],
         zoom: 2.2
       });
