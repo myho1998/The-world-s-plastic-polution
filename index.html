@@ -27,9 +27,6 @@
   <!--  -->
     <script src="./assets/data_for_choropleth.js"></script>
 
-
-
-    <!-- LINE GRAPH SECTION -->
     <div class="container">
       <div class="widgets">
         <div class="widget-background"></div>
@@ -102,8 +99,9 @@
           type: 'vector',
           url: 'mapbox://mapbox.country-boundaries-v1'
         });
+
         const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
-        // Calculate color values for each country based on 'pWaste2016' value
+        //Calculate color values for each country based on 'pWaste2016' value
         for (const row of data) {
           // Convert the range of data values to a suitable color
           const green = row['pWastePercap2016'] * 10;
@@ -112,6 +110,7 @@
         }
       
         matchExpression.push('rgba(0, 0, 0, 0)');
+        
         map.addLayer({
           'id': 'countries-join',
           'type': 'fill',
@@ -121,8 +120,50 @@
             'fill-color': matchExpression,
             'fill-opacity': 0.2
           }
-        }, 'admin-1-boundary-bg');
+        });
       });
+
+      // adding popup
+      map.addSource('popup', {
+        type: 'geojson',
+        // Use a URL for the value for the `data` property.
+        data: './assets/new_data2.json'
+      });
+
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+
+      map.on('mouseenter', 'countries', (e) => {
+      // Change the cursor style as a UI indicator.
+      map.getCanvas().style.cursor = 'pointer';
+      
+      // Copy coordinates array.
+      const long = popup.properties.longitude;
+      const lat = popup.properties.latitude;
+      const a = long + lat;
+      const coordinates = popup.properties[0].a.slice();
+      // const description = e.features[0].properties.description;
+      
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+      
+      // Populate the popup and set its coordinates
+      // based on the feature found.
+      popup.setLngLat(coordinates).setHTML(description).addTo(map);
+      });
+      
+      map.on('mouseleave', 'places', () => {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+      });
+
+
       map.addControl(new mapboxgl.NavigationControl());
     </script>
     <!--  -->
