@@ -38,8 +38,6 @@
         </div>
         <!--  -->
 
-
-
         <!-- PIE CHART SECTION -->
         <!-- "widget" div -->
         <div class="widget" style="height: 50%">
@@ -83,7 +81,6 @@
       <div id="map" class="map"></div>
     </div> <!-- "container" div -->
   
-
     <!-- CHLOROPETH MAP SECTION -->
     <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
@@ -99,13 +96,13 @@
           type: 'vector',
           url: 'mapbox://mapbox.country-boundaries-v1'
         });
-
+        // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
         const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
         //Calculate color values for each country based on 'pWaste2016' value
         for (const row of data) {
           // Convert the range of data values to a suitable color
-          const green = row['pWastePercap2016'] * 10;
-          const color = `rgb(0, 0, ${green})`;
+          const blue = row['pWastePercap2016'] * 10;
+          const color = `rgb(0, 0, ${blue})`;
           matchExpression.push(row['cca3'], color);
         }
       
@@ -124,45 +121,34 @@
       });
 
       // adding popup
-      map.addSource('popup', {
-        type: 'geojson',
-        // Use a URL for the value for the `data` property.
-        data: './assets/new_data2.json'
-      });
-
       const popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
       });
 
-      map.on('mouseenter', 'countries', (e) => {
+      map.on('mouseenter', 'countries-join', (e) => {
       // Change the cursor style as a UI indicator.
-      map.getCanvas().style.cursor = 'pointer';
-      
-      // Copy coordinates array.
-      const long = popup.properties.longitude;
-      const lat = popup.properties.latitude;
-      const a = long + lat;
-      const coordinates = popup.properties[0].a.slice();
-      // const description = e.features[0].properties.description;
-      
+        map.getCanvas().style.cursor = 'pointer';
+
+        const coordinates = row['longitude'] + "," + row['latitude'].slice();
+        const description = row['pWastePercap2016']
+
       // Ensure that if the map is zoomed out such that multiple
       // copies of the feature are visible, the popup appears
       // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
-      
+
       // Populate the popup and set its coordinates
       // based on the feature found.
       popup.setLngLat(coordinates).setHTML(description).addTo(map);
       });
-      
-      map.on('mouseleave', 'places', () => {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-      });
 
+      map.on('mouseleave', 'countries-join', () => {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+      });
 
       map.addControl(new mapboxgl.NavigationControl());
     </script>
