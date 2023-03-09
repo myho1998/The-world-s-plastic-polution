@@ -20,6 +20,7 @@ body {
     flex-basis: 30%;
     flex-direction: column;
     height: 90vh;
+    width: 10px; 
     position: relative;
 }
 
@@ -57,8 +58,7 @@ body {
 }
 
 .curve_chart {
-    width: 50vw;
-    height: 50vh;
+  background-color: #0088a9;
 }
 
 h1 {
