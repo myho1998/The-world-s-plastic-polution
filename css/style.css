@@ -62,6 +62,10 @@ body {
     height: 50vh;
 }
 
+h1 {
+    margin-right: auto;
+    color: #fff;
+}
 
 h2, h3 {
     margin: 10px;
@@ -221,24 +225,23 @@ p {
   
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 30px 10%;
     background-color: #24252a;
   }
   
+  .nav__links {
+    list-style: none;
+    display: flex;
+  }
+
   .nav__links a,
   .overlay__content a {
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     color: #edf0f1;
     text-decoration: none;
-  }
-  
-  .nav__links {
-    list-style: none;
-    display: flex;
-    font-size: 16px;
   }
   
   .nav__links li {
