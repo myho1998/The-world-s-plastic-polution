@@ -91,6 +91,7 @@ function createGraph(selection, data) {
             show: false
         }
     });
+    setTimeout(function () { chart.load({columns: data}); }, 500);
 }
 
 
