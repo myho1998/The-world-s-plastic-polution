@@ -5,42 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
-    <script type="text/javascript">
-      google.charts.load('current', {
-        'packages': ['corechart']
-      });
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Plastic Production (Million tonnes)'],
-          ['1950', 2],
-          ['1960', 8],
-          ['1970', 35],
-          ['1980', 70],
-          ['1990', 120],
-          ['2000', 213],
-          ['2010', 313],
-          ['2019', 459.75],
-        ]);
-        var options = {
-          curveType: 'function',
-          width: 500,  
-          height: 300, 
-          legend: {
-            position: 'bottom'
-          }
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
-      }
-    </script>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
     <link href="./css/style.css" rel="stylesheet" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
-  
   </head>
 
   <body>
@@ -97,7 +65,7 @@
           <p>The following pie chart uses data from: <a href="https://github.com/myho1998/The-world-s-plastic-polution/blob/main/assets/global_waste_exports_2010.csv" target="_blank">Global Waste Exports 2010 Dataset.</a>. </p> 
           <p>The following pie chart displays global plastic exports between different countries, continents, and income level in 2010. The following chart shows each group's global share for exports relative to their counterparts, while also displaying the exact amount when hovered over. </p>
         </div> <!-- "widget" div -->
-        <div class='map-overlay' id='legend'></div>
+        <script src="js/linegraph.js"></script>
       </div> <!-- "widgets" div -->
       <div id="map" class="map"></div>
     </div> <!-- "container" div -->
