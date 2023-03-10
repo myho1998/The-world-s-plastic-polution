@@ -17,7 +17,7 @@ function drawChart() {
   var options = {
     title: 'Plastic production refers to the annual production of polymer resin and fibers( Million tonnes)',
     curveType: 'function',
-    legend: { position: 'bottom' },
+    legend: { position: 'top' },
     width: 500,  
     height: 300
   };
