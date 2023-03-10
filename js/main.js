@@ -3,7 +3,7 @@ mapboxgl.accessToken =
         let map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/lillly02/clf33ygu3001701phfouo9jh9',
-            zoom: 4, // starting zoom
+            zoom: 2, // starting zoom
             center: [-100, 40] // starting center
         });
         const grades = [1000, 5000, 10000, 50000, 100000],
