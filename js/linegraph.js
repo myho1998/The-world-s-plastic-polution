@@ -3,19 +3,19 @@ google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
-    ['Year', 'Plastic Production(Million tonnes)', 'Recycled(Million tonnes'],
+    ['Year', 'Plastic Production', 'Plastic Recycled'],
     ['1950',  2, 1],
     ['1960',  8, 1],
-    ['1970',  35, 3],
-    ['1980',  70, 12],
-    ['1990',  120, 28],
-    ['2000',  213, 43],
-    ['2010',  313, 66],
-    ['2019',  459.75, 86],
+    ['1970',  35, 1],
+    ['1980',  70, 1],
+    ['1990',  120, 5],
+    ['2000',  213, 20],
+    ['2010',  313, 54],
+    ['2019',  459.75, 96],
   ]);
 
   var options = {
-    title: 'Million tonnes by years',
+    title: 'Plastic production refers to the annual production of polymer resin and fibers( Million tonnes)',
     curveType: 'function',
     legend: { position: 'bottom' },
     width: 500,  
