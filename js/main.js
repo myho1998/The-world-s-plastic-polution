@@ -10,13 +10,13 @@ const map = new mapboxgl.Map({
 
 // load data and add as layer
 async function geojsonFetch() {
-    let response = await fetch('assets/new_data2.json');
+    let response = await fetch('./assets/new_data2.json');
     let plastic_waste_2019 = await response.json();
 
     map.on('load', () => { 
         map.addSource('plastic_waste_2019', {
             type: 'geojson',
-            data: plastic_waste_2019
+            data: 'plastic_waste_2019'
         });
 
         map.addLayer({
