@@ -269,3 +269,38 @@ a:link, a:visited {
   margin: 1rem;
   padding: 1rem;
 }
+
+.team-subheading {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.team-members-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 15rem;
+  padding: 1rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,.24);
+  border-radius: 0.25rem;
+  margin: 1rem;
+}
+
+h4 {
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  text-align: center;
+}
