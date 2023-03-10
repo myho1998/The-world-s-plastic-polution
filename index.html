@@ -82,44 +82,6 @@
     </div> <!-- "container" div -->
   
     <!-- CHLOROPETH MAP SECTION -->
-    <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoibGlsbGx5MDIiLCJhIjoiY2xkZ2o4dTA1MHh1MTNxcjhjbmxucGZjZSJ9.ODEhxh5a5B_as4sMO9Z73w';
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v11',
-        center: [12, 50],
-        zoom: 2.2
-      });
-      map.on('load', () => {
-        // Add source for country polygons using the Mapbox Countries tileset
-        map.addSource('countries', {
-          type: 'vector',
-          url: 'mapbox://mapbox.country-boundaries-v1'
-        });
-        // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
-        const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
-        //Calculate color values for each country based on 'pWaste2016' value
-        for (const row of data) {
-          // Convert the range of data values to a suitable color
-          const blue = row['pWastePercap2016'] * 10;
-          const color = `rgb(0, 0, ${blue})`;
-          matchExpression.push(row['cca3'], color);
-        }
-      
-        matchExpression.push('rgba(0, 0, 0, 0)');
-        
-        map.addLayer({
-          'id': 'countries-join',
-          'type': 'fill',
-          'source': 'countries',
-          'source-layer': 'country_boundaries',
-          'paint': {
-            'fill-color': matchExpression,
-            'fill-opacity': 0.2
-          }
-        });
-      });
-    </script>
-    <!--  -->
+    <script src="js/main.js"></script>
   </body>
 </html>
