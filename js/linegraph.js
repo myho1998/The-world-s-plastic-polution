@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
-    ['Year', 'Plastic Production', 'Plastic Recycled'],
+    ['Year', 'Plastic Production', 'Plastic Recycling'],
     ['1950',  2, 0],
     ['1960',  8, 0],
     ['1970',  35, 0],
@@ -15,7 +15,7 @@ function drawChart() {
   ]);
 
   var options = {
-    title: 'Plastic production refers to the annual production of polymer resin and fibers( Million tonnes)',
+    title: 'Annual plastic production (polymer resin and fibers in million tonnes)',
     curveType: 'function',
     legend: { position: 'bottom' },
     width: 500,  
