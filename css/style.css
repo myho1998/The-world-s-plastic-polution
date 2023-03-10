@@ -304,3 +304,12 @@ h4 {
   font-weight: bold;
   text-align: center;
 }
+
+.about-section {
+  background-color: rgb(244, 233, 255);
+}
+
+.team-member {
+  background-color: rgb(244, 233, 255);
+  opacity: 0.8;
+}
