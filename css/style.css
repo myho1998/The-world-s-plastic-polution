@@ -318,9 +318,10 @@ h4 {
 
 .sources-section {
   background-color: rgb(244, 233, 255);
-  margin-left: 30px;
-  margin-right: 30px;
-  padding: 5px;
+  box-shadow: 0 3px 8px rgba(0,0,0,.24);
+  border-radius: 0.25rem;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .sources-container { 
