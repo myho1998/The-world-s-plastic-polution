@@ -250,6 +250,7 @@ header {
 }
 
 /* Changes color of "a" hyperlink */
+/* Makes the dropdown menu and linked data sources unreadable
 a:link, a:visited {
 
   color: white;
@@ -258,6 +259,7 @@ a:link, a:visited {
   text-decoration: none;
   display: inline-block;
 }
+*/
   .about-container {
     padding: 1rem;
     flex-direction: column;
