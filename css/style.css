@@ -260,6 +260,10 @@ a:link, a:visited {
   display: inline-block;
 }
 */
+a:visited {
+  color: black;
+}
+
   .about-container {
     padding: 1rem;
     flex-direction: column;
