@@ -6,7 +6,7 @@
 
     <!-- navigation bar -->
     <header>
-        <h1><a href="index.html" style="color: white; text-decoration: none;">Global Plastic Solution</a></h1>
+        <h1><a href="index.html" style="color: white; text-decoration: none;">Global Plastic Pollution</a></h1>
       <nav>
           <ul class="nav__links">
               <li><a href="index.html" style="color: white">Dashboard</a></li>
@@ -22,13 +22,32 @@
         <h3>
             <b>World Plastic Pollution Dataset</b> 
         </h3>
-        <p>We used this dataset to create our main map that shows the total plastic waste per capita in 2016. First, we cleaned the data by getting rid of any null values and then converted the csv file to a json/js file for easier compatability. We organized the data further by getting rid of feature names we didn't need, like rank. This dataset includes multiple identifying features including cca3 country codes, country names, as well as regions. However, it was missing the longitude and latitude values, which we added in through a Python function.</p>
+        <p>We used this dataset to create our main map that shows the total plastic waste per capita in 2016. 
+            First, we cleaned the data by getting rid of any null values and then converted the CSV file to a JSON/JS file for easier compatability. 
+            We organized the data further by getting rid of feature names we didn't need, such as rank. This dataset includes multiple identifying features including CCA3 country codes, country names, and regions. 
+            However, it was missing the longitude and latitude values, which we added manually using a Python function.</p>
+        
         
         <div class = "sources-button">
             <form action="https://ourworldindata.org/plastic-pollution" method="get" target="_blank">
                 <button type="submit">Dataset</button>
             </form>
         </div>
+        <h3>
+            <b>Plastic Pollution Dataset</b> 
+        </h3>
+        <p>We used this dataset for our widgets and it required far less preprocessing than the dataset we used for our main MapBox map. It includes a variety of different metrics
+            for each country, which made it a large, but interesting dataset to examine and use.
+        </p>
+        
+        
+        <div class = "sources-button">
+            <form action="https://ourworldindata.org/plastic-pollution" method="get" target="_blank">
+                <button type="submit">Dataset</button>
+            </form>
+        </div>
+
+
     </div>
         </body>
     </head>
