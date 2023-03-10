@@ -250,6 +250,7 @@ header {
 }
 
 /* Changes color of "a" hyperlink */
+/* Makes the dropdown menu and linked data sources unreadable
 a:link, a:visited {
 
   color: white;
@@ -258,6 +259,11 @@ a:link, a:visited {
   text-decoration: none;
   display: inline-block;
 }
+*/
+a:visited {
+  color: black;
+}
+
   .about-container {
     padding: 1rem;
     flex-direction: column;
@@ -312,4 +318,20 @@ h4 {
 .team-member {
   background-color: rgb(244, 233, 255);
   opacity: 0.8;
+}
+
+.sources-section {
+  background-color: rgb(244, 233, 255);
+  box-shadow: 0 3px 8px rgba(0,0,0,.24);
+  border-radius: 0.25rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.sources-container { 
+  padding: 1rem;
+}
+
+.sources-button {
+  margin-left: 30px;
 }
