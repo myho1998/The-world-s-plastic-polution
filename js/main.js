@@ -6,23 +6,23 @@ mapboxgl.accessToken =
             zoom: 2, // starting zoom
             center: [50, 40] // starting center
         });
-        const grades = [50, 70, 90, 110, 130],
-        colors = ['rgb(208,209,230)', 'rgb(103,169,207)', 'rgb(1,108,89)', 'rgb(1,59,48)', 'rgb(0,18,14)'],
-        radii = [5, 10, 15, 20, 40];
+        const grades = [100, 500, 1000, 5000, 10000, 35000],
+        colors = ['rgb(235,209,256)', 'rgb(205,145,242)', 'rgb(161,53,237)', 'rgb(138,18,237)', 'rgb(84,9,149)', 'rgb(58,5,102)'],
+        radii = [5, 10, 15, 20, 25];
         
         map.on('load', () => { 
-            map.addSource('us-covid-2020-counts', {
+            map.addSource('pWaste2016data', {
                 type: 'geojson',
                 data: 'assets/data_for_choropleth.js'
             });
             map.addLayer({
-                'id': 'covid-2020-counts',
+                'id': 'pWaste2016Counts',
                 'type': 'circle',
-                'source': 'us-covid-2020-counts',
+                'source': 'pWaste2016data',
                 'paint': {
                     // increase the radii of the circle as cases value increases
                     'circle-radius': {
-                        'property': 'pWastePercap2016',
+                        'property': 'pWaste2016',
                         'stops': [
                             [grades[0], radii[0]],
                             [grades[1], radii[1]],
@@ -33,7 +33,7 @@ mapboxgl.accessToken =
                     },
                     // change the color of the circle as cases value increases
                     'circle-color': {
-                        'property': 'pWastePercap2016',
+                        'property': 'pWaste2016',
                         'stops': [
                             [grades[0], colors[0]],
                             [grades[1], colors[1]],
@@ -52,13 +52,13 @@ mapboxgl.accessToken =
 const legend = document.getElementById('legend');
 
 //set up legend grades and labels
-var labels = ['<strong>Size</strong>'], vbreak;
+var labels = ['<center><strong>Total Pollution in 2016 (Per thousand metric tons)</center></strong>'], vbreak;
 //iterate through grades and create a scaled circle and label for each
 for (var i = 0; i < grades.length; i++) {
     vbreak = grades[i];
     // you need to manually adjust the radius of each dot on the legend 
     // in order to make sure the legend can be properly referred to the dot on the map.
-    dot_radius = 2 * radii[i];
+    dot_radius = 4 * radii[i];
     labels.push(
         '<p class="break"><i class="dot" style="background:' + colors[i] + '; width: ' + dot_radius +
         'px; height: ' +
